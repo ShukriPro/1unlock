@@ -33,7 +33,11 @@ class AuthorizationManager: ObservableObject {
 struct ContentView: View {
     @StateObject var authManager = AuthorizationManager()
     var body: some View {
-        ProfileEditorView()
+        VStack {
+            ProfileEditorView()
+            HomeView()
+        }
+        
 //        VStack {
 //            Text("Authorization Status: \(String(describing: authManager.authorizationStatus))")
 //            ProfileEditorView()

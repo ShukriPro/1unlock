@@ -66,6 +66,9 @@ struct ProfileEditorView: View {
             // In a real app, you'd likely save 'newSelection'
             // to your data model (like the 'BlockedProfiles' model).
             saveSelection(newSelection)
+            #if os(iOS)
+            NotificationCenter.default.post(name: .selectionDidChange, object: nil)
+            #endif
         }
         .onAppear {
             // Load previously saved selection from App Group so counts persist across launches
