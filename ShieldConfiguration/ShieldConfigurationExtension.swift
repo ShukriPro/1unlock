@@ -14,10 +14,11 @@ import UIKit
 // Make sure that your class name matches the NSExtensionPrincipalClass in your Info.plist.
 class ShieldConfigurationExtension: ShieldConfigurationDataSource {
     override func configuration(shielding application: Application) -> ShieldConfiguration {
-        // Customize the shield as needed for applications.
-        ShieldConfiguration()
-    }
-    
+            return ShieldConfiguration(
+                title: ShieldConfiguration.Label(text: "DoomScrool", color: .label),
+                primaryButtonLabel: .init(text: "Unlock App", color: .white), primaryButtonBackgroundColor: .systemBlue
+            )
+        }
     override func configuration(shielding application: Application, in category: ActivityCategory) -> ShieldConfiguration {
         // Customize the shield as needed for applications shielded because of their category.
         ShieldConfiguration()
