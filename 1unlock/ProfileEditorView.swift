@@ -67,11 +67,22 @@ struct ProfileEditorView: View {
             // to your data model (like the 'BlockedProfiles' model).
             saveSelection(newSelection)
         }
+        .onAppear {
+            // Load previously saved selection from App Group so counts persist across launches
+            #if os(iOS)
+            if let saved = SharedState.loadSelection() {
+                activitySelection = saved
+            }
+            #endif
+        }
     }
     func saveSelection(_ selection: FamilyActivitySelection) {
         // Placeholder: Implement saving logic here
         // e.g., update your SwiftData model:
         // try? BlockedProfiles.updateProfile(profile, in: context, selection: selection)
         print("Saving selection...")
+        #if os(iOS)
+        SharedState.saveSelection(selection)
+        #endif
     }
 }
