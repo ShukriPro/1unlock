@@ -7,6 +7,8 @@
 
 import FamilyControls
 import SwiftUI
+import UserNotifications
+import Foundation
 class AuthorizationManager: ObservableObject {
     @Published var authorizationStatus: FamilyControls.AuthorizationStatus = .notDetermined
     init() {
@@ -31,6 +33,14 @@ class AuthorizationManager: ObservableObject {
 }
 // Example Usage in a SwiftUI View
 struct ContentView: View {
+
+    init() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, _ in
+            print("Notification permission: \(granted)")
+        }
+        UNUserNotificationCenter.current().delegate = NotificationsDelegate.shared
+    }
+
     @StateObject var authManager = AuthorizationManager()
     var body: some View {
         VStack {
